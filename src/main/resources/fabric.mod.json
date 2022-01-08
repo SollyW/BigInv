@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 1,
+  "id": "biginv",
+  "version": "${version}",
+
+  "name": "BigInv",
+  "description": "Bigger inventory and hotbar",
+  "authors": [
+    "SollyW"
+  ],
+
+  "license": "Public Domain",
+  "icon": "assets/biginv/icon.png",
+
+  "environment": "*",
+  "mixins": [
+    "biginv.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.11.3",
+    "fabric": "*",
+    "minecraft": "1.18.x",
+    "java": ">=17"
+  },
+
+  "recommends": {
+    "roughlyenoughitems": "*"
+  }
+}
