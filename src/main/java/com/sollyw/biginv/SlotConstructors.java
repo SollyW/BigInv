@@ -2,6 +2,7 @@ package com.sollyw.biginv;
 
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.inventory.Inventory;
+import net.minecraft.screen.PlayerScreenHandler;
 import net.minecraft.screen.slot.Slot;
 
 /**
@@ -18,8 +19,8 @@ public class SlotConstructors {
              Load the classes to ensure the static constructor has been called,
              and the above constants are not null
              */
-            Class.forName("net.minecraft.screen.PlayerScreenHandler$1");
-            Class.forName("net.minecraft.screen.PlayerScreenHandler$2");
+            Class.forName(PlayerScreenHandler.class.getName() + "$1");
+            Class.forName(PlayerScreenHandler.class.getName() + "$2");
         } catch (ClassNotFoundException e) {
             BigInv.LOGGER.error("Poking PlayerScreenHandler anonymous class failed");
             e.printStackTrace();
