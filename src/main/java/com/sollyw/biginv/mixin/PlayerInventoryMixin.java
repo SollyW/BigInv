@@ -51,7 +51,7 @@ public abstract class PlayerInventoryMixin {
         return 18;
     }
 
-    @ModifyConstant(method = {"getOccupiedSlotWithRoomForStack"},
+    @ModifyConstant(method = "getOccupiedSlotWithRoomForStack",
             constant = @Constant(intValue = 40))
     private int offhandSlot(int value) {
         return 112;
