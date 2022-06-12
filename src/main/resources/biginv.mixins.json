@@ -19,7 +19,6 @@
   ],
   "client": [
     "client.AbstractFurnaceScreenMixin",
-    "client.ClientPlayerInteractionManagerMixin",
     "client.CraftingScreenMixin",
     "client.GameOptionsMixin",
     "client.HandledScreenMixin",
