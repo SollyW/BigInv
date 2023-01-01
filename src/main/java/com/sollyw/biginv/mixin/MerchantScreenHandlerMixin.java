@@ -3,9 +3,9 @@ package com.sollyw.biginv.mixin;
 import com.sollyw.biginv.BigInvModInfo;
 import com.sollyw.biginv.ScreenHandlerOverrides;
 import com.sollyw.biginv.ScreenHandlerExt;
+import net.minecraft.registry.Registries;
 import net.minecraft.screen.MerchantScreenHandler;
 import net.minecraft.screen.slot.Slot;
-import net.minecraft.util.registry.Registry;
 import net.minecraft.village.MerchantInventory;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
@@ -30,7 +30,7 @@ public abstract class MerchantScreenHandlerMixin implements ScreenHandlerExt {
     public BigInvModInfo biginv$getModInfo() {
         if (this.biginv$getType() != null) {
             return ScreenHandlerOverrides.SCREEN_HANDLER_OVERRIDES.getOrDefault(
-                    Registry.SCREEN_HANDLER.getId(this.biginv$getType()),
+                    Registries.SCREEN_HANDLER.getId(this.biginv$getType()),
                     BigInvModInfo.MERCHANT);
         }
         return BigInvModInfo.MERCHANT;

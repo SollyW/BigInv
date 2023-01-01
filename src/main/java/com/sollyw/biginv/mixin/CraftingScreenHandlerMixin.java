@@ -7,13 +7,13 @@ import org.spongepowered.asm.mixin.injection.ModifyConstant;
 
 @Mixin(CraftingScreenHandler.class)
 public abstract class CraftingScreenHandlerMixin {
-    @ModifyConstant(method = "transferSlot",
+    @ModifyConstant(method = "quickMove",
             constant = @Constant(intValue = 46))
     private int invEnd(int constant) {
         return 118;
     }
 
-    @ModifyConstant(method = "transferSlot",
+    @ModifyConstant(method = "quickMove",
             constant = @Constant(intValue = 37))
     private int hotbarStart(int constant) {
         return 100;

@@ -25,7 +25,7 @@ public abstract class PlayerScreenHandlerMixin implements ScreenHandlerExt {
         return slot >= 108 && slot <= 126;
     }
 
-    @ModifyConstant(method = "transferSlot",
+    @ModifyConstant(method = "quickMove",
             constant = {
                     @Constant(intValue = 9,
                             ordinal = 1),
@@ -41,7 +41,7 @@ public abstract class PlayerScreenHandlerMixin implements ScreenHandlerExt {
         return 5;
     }
 
-    @ModifyConstant(method = "transferSlot",
+    @ModifyConstant(method = "quickMove",
             constant = {
                     @Constant(intValue = 36,
                             ordinal = 0),
@@ -55,7 +55,7 @@ public abstract class PlayerScreenHandlerMixin implements ScreenHandlerExt {
         return 95;
     }
 
-    @ModifyConstant(method = "transferSlot",
+    @ModifyConstant(method = "quickMove",
             constant = {
                     @Constant(intValue = 45,
                             ordinal = 1),
@@ -73,7 +73,7 @@ public abstract class PlayerScreenHandlerMixin implements ScreenHandlerExt {
         return 113;
     }
 
-    @ModifyConstant(method = "transferSlot",
+    @ModifyConstant(method = "quickMove",
             constant = {
                     @Constant(intValue = 8,
                             ordinal = 0),
@@ -83,7 +83,7 @@ public abstract class PlayerScreenHandlerMixin implements ScreenHandlerExt {
         return 116;
     }
 
-    @ModifyConstant(method = "transferSlot",
+    @ModifyConstant(method = "quickMove",
             constant = {
                     @Constant(intValue = 9,
                             ordinal = 2),
@@ -95,7 +95,7 @@ public abstract class PlayerScreenHandlerMixin implements ScreenHandlerExt {
         return 117;
     }
 
-    @ModifyConstant(method = "transferSlot",
+    @ModifyConstant(method = "quickMove",
             constant = @Constant(intValue = 46,
                             ordinal = 0))
     private int offhandEnd(int value) {

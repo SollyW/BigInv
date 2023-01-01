@@ -15,7 +15,7 @@ public class BigInvScreenHelper {
 
     public static void patchScreen(MatrixStack matrices, int x, int y, int backgroundWidth, int backgroundHeight,
                                    int mouseX, int mouseY, LivingEntity entity, RightmostBehaviour rightmostBehaviour) {
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+        RenderSystem.setShader(GameRenderer::getPositionTexProgram);
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
         RenderSystem.setShaderTexture(0, MOD_BACKGROUND);
 

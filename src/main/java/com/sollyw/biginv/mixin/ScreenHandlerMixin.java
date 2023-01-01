@@ -2,10 +2,10 @@ package com.sollyw.biginv.mixin;
 
 import com.sollyw.biginv.*;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.registry.Registries;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.ScreenHandlerType;
 import net.minecraft.screen.slot.Slot;
-import net.minecraft.util.registry.Registry;
 import org.jetbrains.annotations.Nullable;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
@@ -81,7 +81,7 @@ public abstract class ScreenHandlerMixin implements ScreenHandlerExt {
     public BigInvModInfo biginv$getModInfo() {
         if (this.type != null) {
             return ScreenHandlerOverrides.SCREEN_HANDLER_OVERRIDES.getOrDefault(
-                    Registry.SCREEN_HANDLER.getId(this.type),
+                    Registries.SCREEN_HANDLER.getId(this.type),
                     BigInvModInfo.DEFAULT);
         }
 
