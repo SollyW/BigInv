@@ -1,10 +1,17 @@
 package com.sollyw.biginv;
 
+import com.mojang.datafixers.util.Pair;
 import com.sollyw.biginv.mixin.SlotAccessor;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.entity.mob.MobEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.entity.player.PlayerInventory;
+import net.minecraft.item.ItemStack;
+import net.minecraft.screen.PlayerScreenHandler;
 import net.minecraft.screen.ScreenHandler;
 import net.minecraft.screen.slot.Slot;
+import net.minecraft.util.Identifier;
 
 public class BigInvScreenHandlerHelper {
     public static final EquipmentSlot[] EQUIPMENT_SLOT_ORDER = {
@@ -15,54 +22,65 @@ public class BigInvScreenHandlerHelper {
 
     public static Slot[] createSlots(ScreenHandler handler, PlayerInventory playerInventory) {
         ScreenHandlerExt handlerX = (ScreenHandlerExt) handler;
-        Slot[] slots = new Slot[108]; // used to be 113, but I am temporarily taking out the offhand and armour slots
+        Slot[] slots = new Slot[113];
 
         handlerX.biginv$setModStage(BigInvModStage.MODDING);
 
-        int y = 0;
         for(int i = 0; i < 90; ++i) {
             int index = i + 18;
-            if (i % 18 == 0) {
-                y = y + 18;
-            }
             slots[index] = handlerX.biginv$addSlot(new Slot(
                     playerInventory,
                     index,
-                    i * 18, // these are placeholder numbers until I can figure out what is wrong with positionSlots()
-                    y));
+                    -9999,
+                    -9999));
         }
 
         for(int i = 0; i < 18; ++i) {
             slots[i] = handlerX.biginv$addSlot(new Slot(
                     playerInventory,
                     i,
-                    i * 18,
-                    0));
+                    -9999,
+                    -9999));
         }
-/*
-        slots[112] = handlerX.biginv$addSlot(SlotConstructors.OFFHAND.init(
-                playerInventory,
-                112,
-                -9999,
-                -9999));
 
-        slots[111] = handlerX.biginv$addSlot(SlotConstructors.ARMOUR.init(
-                playerInventory,
-                111,
-                -9999,
-                -9999,
-                EquipmentSlot.HEAD));*/
-/*
+
+        slots[112] = handlerX.biginv$addSlot(new Slot(playerInventory, 112, -9999, -9999) {
+            public void setStack(ItemStack stack) {
+                PlayerScreenHandler.onEquipStack(playerInventory.player, EquipmentSlot.OFFHAND, stack, this.getStack()); // I need to use PlayerEntity owner, not null
+                super.setStack(stack);
+            }
+            public Pair<Identifier, Identifier> getBackgroundSprite() {
+                return Pair.of(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE, PlayerScreenHandler.EMPTY_OFFHAND_ARMOR_SLOT);
+            }
+        });
+
         for(int i = 0; i < 4; ++i) {
             int index = 111 - i;
-            slots[index] = handlerX.biginv$addSlot(SlotConstructors.ARMOUR.init(
-                    playerInventory,
-                    index,
-                    -9999,
-                    -9999,
-                    EQUIPMENT_SLOT_ORDER[i]
-            ));
-        }*/
+            final EquipmentSlot equipmentSlot = EQUIPMENT_SLOT_ORDER[i];
+            slots[index] = handlerX.biginv$addSlot(new Slot(playerInventory, index, -9999, -9999) {
+                public void setStack(ItemStack stack) {
+                    PlayerScreenHandler.onEquipStack(playerInventory.player, equipmentSlot, stack, this.getStack());
+                    super.setStack(stack);
+                }
+
+                public int getMaxItemCount() {
+                    return 1;
+                }
+
+                public boolean canInsert(ItemStack stack) {
+                    return equipmentSlot == MobEntity.getPreferredEquipmentSlot(stack);
+                }
+
+                public boolean canTakeItems(PlayerEntity playerEntity) {
+                    ItemStack itemStack = this.getStack();
+                    return (itemStack.isEmpty() || playerEntity.isCreative() || !EnchantmentHelper.hasBindingCurse(itemStack)) && super.canTakeItems(playerEntity);
+                }
+
+                public Pair<Identifier, Identifier> getBackgroundSprite() {
+                    return Pair.of(PlayerScreenHandler.BLOCK_ATLAS_TEXTURE, PlayerScreenHandler.EMPTY_ARMOR_SLOT_TEXTURES[equipmentSlot.getEntitySlotId()]);
+                }
+            });
+        }
 
         handlerX.biginv$setModStage(BigInvModStage.FINISHED);
         return slots;
@@ -85,7 +103,7 @@ public class BigInvScreenHandlerHelper {
                     col * 18 - 154 + offsetX,
                     offsetY + 178);
         }
-        /*
+
         move(slots,
                 112,
                 armourOffsetX - 85,
@@ -96,7 +114,7 @@ public class BigInvScreenHandlerHelper {
                     111 - row,
                     armourOffsetX - 154,
                     armourOffsetY + 8 + row * 18);
-        }*/
+        }
     }
 
     private static void move(Slot[] slots, int index, int x, int y) {

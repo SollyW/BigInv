@@ -37,6 +37,10 @@ java {
     withSourcesJar()
 }
 
+loom {
+    accessWidenerPath = file("src/main/resources/biginv.accesswidener")
+}
+
 publishing {
     publications {
         mavenJava(MavenPublication) {
