@@ -51,11 +51,11 @@ public abstract class ScreenHandlerMixin implements ScreenHandlerExt {
                             playerInventory);
 
                     // Slot index zero, the leftmost hotbar slot, is used to align the new slots
-                    BigInvScreenHandlerHelper.positionSlots(this.bigInvSlots,
+                    /*BigInvScreenHandlerHelper.positionSlots(this.bigInvSlots,
                             info.slotOffsetX().applyTo(slot.x - 8),
                             info.slotOffsetY().applyTo(slot.y - 142),
                             info.armourSlotOffsetX().applyTo(slot.x - 8),
-                            info.armourSlotOffsetY().applyTo(slot.y - 142));
+                            info.armourSlotOffsetY().applyTo(slot.y - 142));*/
                 }
 
                 if (info.shouldEmulateVanillaSlots()) {
@@ -95,9 +95,10 @@ public abstract class ScreenHandlerMixin implements ScreenHandlerExt {
 
     @Override
     public void biginv$positionSlots(int offsetX, int offsetY, int armourOffsetX, int armourOffsetY) {
+        /*
         if (this.bigInvSlots != null) {
             BigInvScreenHandlerHelper.positionSlots(this.bigInvSlots, offsetX, offsetY, armourOffsetX, armourOffsetY);
-        }
+        }*/
     }
 
     @Override

@@ -124,12 +124,12 @@ public class BigInvScreenHelper {
         if (entity != null) {
             int x0 = x - 49;
             int y0 = y + backgroundHeight - 91;
-            InventoryScreen.drawEntity(
+            InventoryScreen.drawEntity(matrices,
                     x0,
                     y0,
                     30,
-                    x0 - mouseX,
-                    y0 - 50 - mouseY,
+                    (float)(x0 - mouseX),
+                    (float)(y0 - 50 - mouseY),
                     entity);
         }
     }

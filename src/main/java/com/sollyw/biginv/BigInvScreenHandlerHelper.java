@@ -19,29 +19,40 @@ public class BigInvScreenHandlerHelper {
 
         handlerX.biginv$setModStage(BigInvModStage.MODDING);
 
+        int y = 0;
         for(int i = 0; i < 90; ++i) {
             int index = i + 18;
+            if (i % 18 == 0) {
+                y = y + 18;
+            }
             slots[index] = handlerX.biginv$addSlot(new Slot(
                     playerInventory,
                     index,
-                    -9999,
-                    -9999));
+                    i * 18, // these are placeholder numbers until I can figure out what is wrong with positionSlots()
+                    y));
         }
 
         for(int i = 0; i < 18; ++i) {
             slots[i] = handlerX.biginv$addSlot(new Slot(
                     playerInventory,
                     i,
-                    -9999,
-                    -9999));
+                    i * 18,
+                    0));
         }
-
+/*
         slots[112] = handlerX.biginv$addSlot(SlotConstructors.OFFHAND.init(
                 playerInventory,
                 112,
                 -9999,
                 -9999));
 
+        slots[111] = handlerX.biginv$addSlot(SlotConstructors.ARMOUR.init(
+                playerInventory,
+                111,
+                -9999,
+                -9999,
+                EquipmentSlot.HEAD));*/
+/*
         for(int i = 0; i < 4; ++i) {
             int index = 111 - i;
             slots[index] = handlerX.biginv$addSlot(SlotConstructors.ARMOUR.init(
@@ -51,13 +62,14 @@ public class BigInvScreenHandlerHelper {
                     -9999,
                     EQUIPMENT_SLOT_ORDER[i]
             ));
-        }
+        }*/
 
         handlerX.biginv$setModStage(BigInvModStage.FINISHED);
         return slots;
     }
 
     public static void positionSlots(Slot[] slots, int offsetX, int offsetY, int armourOffsetX, int armourOffsetY) {
+        /*
         for(int row = 0; row < 5; ++row) {
             for(int col = 0; col < 18; ++col) {
                 move(slots,
@@ -84,7 +96,7 @@ public class BigInvScreenHandlerHelper {
                     111 - row,
                     armourOffsetX - 154,
                     armourOffsetY + 8 + row * 18);
-        }
+        }*/
     }
 
     private static void move(Slot[] slots, int index, int x, int y) {

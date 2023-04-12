@@ -17,6 +17,7 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(InGameHud.class)
 public abstract class InGameHudMixin {
+    /*
     @Shadow
     protected abstract void renderHotbarItem(int x, int y, float tickDelta, PlayerEntity player, ItemStack stack, int seed);
 
@@ -103,5 +104,5 @@ public abstract class InGameHudMixin {
                     ordinal = 1), index = 1)
     private int moveSelectionOutline(MatrixStack matrices, int x, int y, int u, int v, int width, int height) {
         return x - 90;
-    }
+    }*/
 }
