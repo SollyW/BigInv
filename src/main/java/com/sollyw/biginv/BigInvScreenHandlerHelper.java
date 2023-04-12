@@ -15,7 +15,7 @@ public class BigInvScreenHandlerHelper {
 
     public static Slot[] createSlots(ScreenHandler handler, PlayerInventory playerInventory) {
         ScreenHandlerExt handlerX = (ScreenHandlerExt) handler;
-        Slot[] slots = new Slot[113];
+        Slot[] slots = new Slot[108]; // used to be 113, but I am temporarily taking out the offhand and armour slots
 
         handlerX.biginv$setModStage(BigInvModStage.MODDING);
 
@@ -69,7 +69,7 @@ public class BigInvScreenHandlerHelper {
     }
 
     public static void positionSlots(Slot[] slots, int offsetX, int offsetY, int armourOffsetX, int armourOffsetY) {
-        /*
+
         for(int row = 0; row < 5; ++row) {
             for(int col = 0; col < 18; ++col) {
                 move(slots,
@@ -85,7 +85,7 @@ public class BigInvScreenHandlerHelper {
                     col * 18 - 154 + offsetX,
                     offsetY + 178);
         }
-
+        /*
         move(slots,
                 112,
                 armourOffsetX - 85,
