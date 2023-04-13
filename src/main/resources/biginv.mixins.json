@@ -10,7 +10,6 @@
     "PlayerInventoryMixin",
     "PlayerScreenHandlerMixin",
     "ScreenHandlerMixin",
-    "ServerPlayNetworkHandlerMixin",
     "ShulkerBoxScreenHandlerMixin",
     "SlotAccessor"
   ],
