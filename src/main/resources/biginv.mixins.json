@@ -5,15 +5,11 @@
   "compatibilityLevel": "JAVA_17",
   "mixins": [
     "CraftingScreenHandlerMixin",
-    "ForgingScreenHandlerMixin",
     "GenericContainerScreenHandlerMixin",
     "MerchantScreenHandlerMixin",
     "PlayerInventoryMixin",
-    "PlayerScreenHandler$1Mixin",
-    "PlayerScreenHandler$2Mixin",
     "PlayerScreenHandlerMixin",
     "ScreenHandlerMixin",
-    "ServerPlayNetworkHandlerMixin",
     "ShulkerBoxScreenHandlerMixin",
     "SlotAccessor"
   ],

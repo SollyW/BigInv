@@ -15,7 +15,7 @@ public class BigInvScreenHelper {
 
     public static void patchScreen(MatrixStack matrices, int x, int y, int backgroundWidth, int backgroundHeight,
                                    int mouseX, int mouseY, LivingEntity entity, RightmostBehaviour rightmostBehaviour) {
-        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+        RenderSystem.setShader(GameRenderer::getPositionTexProgram);
         RenderSystem.setShaderColor(1.0f, 1.0f, 1.0f, 1.0f);
         RenderSystem.setShaderTexture(0, MOD_BACKGROUND);
 
@@ -124,12 +124,12 @@ public class BigInvScreenHelper {
         if (entity != null) {
             int x0 = x - 49;
             int y0 = y + backgroundHeight - 91;
-            InventoryScreen.drawEntity(
+            InventoryScreen.drawEntity(matrices,
                     x0,
                     y0,
                     30,
-                    x0 - mouseX,
-                    y0 - 50 - mouseY,
+                    (float)(x0 - mouseX),
+                    (float)(y0 - 50 - mouseY),
                     entity);
         }
     }

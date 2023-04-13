@@ -1,7 +1,7 @@
 //file:noinspection All
 
 plugins {
-    id 'fabric-loom' version '0.12-SNAPSHOT'
+    id 'fabric-loom' version '1.0-SNAPSHOT'
     id 'maven-publish'
 }
 
@@ -35,6 +35,10 @@ tasks.withType(JavaCompile).configureEach {
 
 java {
     withSourcesJar()
+}
+
+loom {
+    accessWidenerPath = file("src/main/resources/biginv.accesswidener")
 }
 
 publishing {

@@ -1,0 +1,3 @@
+accessWidener	v1	named
+accessible method net/minecraft/screen/PlayerScreenHandler onEquipStack (Lnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/entity/EquipmentSlot;Lnet/minecraft/item/ItemStack;Lnet/minecraft/item/ItemStack;)V
+accessible field net/minecraft/screen/PlayerScreenHandler EMPTY_ARMOR_SLOT_TEXTURES [Lnet/minecraft/util/Identifier;

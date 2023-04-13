@@ -17,8 +17,9 @@ import org.spongepowered.asm.mixin.injection.Redirect;
 
 @Mixin(InGameHud.class)
 public abstract class InGameHudMixin {
+
     @Shadow
-    protected abstract void renderHotbarItem(int x, int y, float tickDelta, PlayerEntity player, ItemStack stack, int seed);
+    protected abstract void renderHotbarItem(MatrixStack matrixStack, int i, int j, float f, PlayerEntity playerEntity, ItemStack itemStack, int k);
 
     @Shadow
     private int scaledWidth;
@@ -32,18 +33,20 @@ public abstract class InGameHudMixin {
 
     @Redirect(method = "renderHotbar",
             at = @At(value = "INVOKE",
-                    target = "Lnet/minecraft/client/gui/hud/InGameHud;renderHotbarItem(IIFLnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/item/ItemStack;I)V",
+                    target = "Lnet/minecraft/client/gui/hud/InGameHud;renderHotbarItem(Lnet/minecraft/client/util/math/MatrixStack;IIFLnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/item/ItemStack;I)V",
                     ordinal = 0))
-    private void renderHotbarItem(InGameHud instance, int x, int y, float tickDelta, PlayerEntity player, ItemStack stack, int seed) {
+    private void renderHotbarItem(InGameHud instance, MatrixStack matrixStack, int x, int y, float tickDelta, PlayerEntity player, ItemStack itemStack, int seed) {
         int n2 = (x + 88 - this.scaledWidth / 2) / 20;
-        this.renderHotbarItem(x - 90,
+        this.renderHotbarItem(matrixStack,
+                x - 90,
                 y,
                 tickDelta,
                 player,
                 this.getCameraPlayer().getInventory().main.get(n2),
                 seed);
 
-        this.renderHotbarItem(x + 90,
+        this.renderHotbarItem(matrixStack,
+                x + 90,
                 y,
                 tickDelta,
                 player,
@@ -53,19 +56,19 @@ public abstract class InGameHudMixin {
 
     @ModifyArg(method = "renderHotbar",
             at = @At(value = "INVOKE",
-                    target = "Lnet/minecraft/client/gui/hud/InGameHud;renderHotbarItem(IIFLnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/item/ItemStack;I)V",
+                    target = "Lnet/minecraft/client/gui/hud/InGameHud;renderHotbarItem(Lnet/minecraft/client/util/math/MatrixStack;IIFLnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/item/ItemStack;I)V",
                     ordinal = 1),
-            index = 0)
-    private int moveOffhandLeft(int x, int y, float tickDelta, PlayerEntity player, ItemStack stack, int seed) {
+            index = 1)
+    private int moveOffhandLeft(int x) {
         return x - 90;
     }
 
     @ModifyArg(method = "renderHotbar",
             at = @At(value = "INVOKE",
-                    target = "Lnet/minecraft/client/gui/hud/InGameHud;renderHotbarItem(IIFLnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/item/ItemStack;I)V",
+                    target = "Lnet/minecraft/client/gui/hud/InGameHud;renderHotbarItem(Lnet/minecraft/client/util/math/MatrixStack;IIFLnet/minecraft/entity/player/PlayerEntity;Lnet/minecraft/item/ItemStack;I)V",
                     ordinal = 2),
-            index = 0)
-    private int moveOffhandRight(int x, int y, float tickDelta, PlayerEntity player, ItemStack stack, int seed) {
+            index = 1)
+    private int moveOffhandRight(int x) {
         return x + 90;
     }
 
@@ -91,9 +94,9 @@ public abstract class InGameHudMixin {
             at = @At(value = "INVOKE",
                     target = "Lnet/minecraft/client/gui/hud/InGameHud;drawTexture(Lnet/minecraft/client/util/math/MatrixStack;IIIIII)V",
                     ordinal = 0))
-    private void drawTexture(InGameHud instance, MatrixStack matrices, int x, int y, int u, int v, int width, int height) {
+    private void drawTexture(MatrixStack matrices, int x, int y, int u, int v, int width, int height) {
         RenderSystem.setShaderTexture(0, BigInvScreenHelper.BIG_HOTBAR);
-        DrawableHelper.drawTexture(matrices, x - 90, y, instance.getZOffset(), 0, 0, width << 1, height, 512, 32);
+        DrawableHelper.drawTexture(matrices, x - 90, y, 0, 0, width << 1, height, 512, 32);
         RenderSystem.setShaderTexture(0, WIDGETS_TEXTURE);
     }
 
