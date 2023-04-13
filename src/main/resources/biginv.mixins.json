@@ -8,8 +8,6 @@
     "GenericContainerScreenHandlerMixin",
     "MerchantScreenHandlerMixin",
     "PlayerInventoryMixin",
-    "PlayerScreenHandler$1Mixin",
-    "PlayerScreenHandler$2Mixin",
     "PlayerScreenHandlerMixin",
     "ScreenHandlerMixin",
     "ServerPlayNetworkHandlerMixin",
